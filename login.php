@@ -19,27 +19,39 @@
 
         <?php
             
-            $form = "<form action='./login.php' method='post'>
-            
-            <table>
-            <tr>
-                <td> Username: </td>
-                <td><input type ='text' name='user' /> </td>
-            </tr>
+     if ($username && $userid){
+                echo "You are already logged in as <b>$username</b>. Click <a href='./member.php'>here</a> to go to the member page.";
 
-            <tr>
-                <td> Password: </td>
-                <td><input type ='password' name='password' /> </td>
-            </tr>
+            }
+            else{
+                
+             $form = "<form action='./login.php' method='post'>
             
-            <tr>
-                <td></td>
-                <td><input type ='submit' name='loginbtn' value = 'Login' /> </td>
-            </tr>
+             <table>
+             <tr>
+                    <td> Username: </td>
+                    <td><input type ='text' name='user' /> </td>
+             </tr>
+
+             <tr>
+                    <td> Password: </td>
+                    <td><input type ='password' name='password' /> </td>
+             </tr>
+            
+              <tr>
+                    <td></td>
+                    <td><input type ='submit' name='loginbtn' value = 'Login' /> </td>
+              </tr>
+               <tr>
+                    <td><a href='./register.php'>Resgister</a></td>
+                    <td><a href ='./forgotpass.php'>Forgot Password</a></td>
+              </tr>
            
-            </table>
+             </table>
             
-            </form>";
+             </form>";
+
+
             
             if ($_POST['loginbtn']) {
                 $user = $_POST['user'];
@@ -94,7 +106,7 @@
             
             else
                 echo $form;
-            
+        }
         ?>
 
     </body>
