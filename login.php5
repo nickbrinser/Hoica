@@ -23,7 +23,7 @@
                 echo "You are already logged in as <b>$username</b>. Click <a href='./member.php'>here</a> to go to the member page.";
 
             }
-            else{
+            else
                 
              $form = "<form action='./login.php' method='post'>
             
@@ -73,10 +73,25 @@
                         	$dbpass = $row('password');
                         	$dbactive = $row('active');
 
+
+								error_reporting(E_ALL ^ E_NOTICE);
+								ini_set('display_errors',1); 
+
+
+
                         	if($password == $dbpass){
+                        		
+                        		
+								error_reporting(E_ALL ^ E_NOTICE);
+								ini_set('display_errors',1); 
                         		
                         		if($dbactive == 1){
                         			
+                        				
+										error_reporting(E_ALL ^ E_NOTICE);
+										ini_set('display_errors',1); 
+                        				
+
                         			//set session info
                         			$_SESSION['userid'] = $dbid;
                         			$_SESSION['username'] = $dbuser;
@@ -107,7 +122,7 @@
             
             else
                 echo $form;
-        }
+        
         ?>
 
     </body>
