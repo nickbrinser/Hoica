@@ -1,16 +1,14 @@
 <?php
 
-	
 	error_reporting(E_ALL ^ E_NOTICE);
-	ini_set('display_errors',1); 
-	
+		ini_set('display_errors',1); 
+
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> Member System - Register </title>
     </head>
 
@@ -19,7 +17,8 @@
     <?php
 
 		error_reporting(E_ALL ^ E_NOTICE);
-		ini_set('display_errors',1); 
+			ini_set('display_errors',1); 
+
 
     if( $_POST['registerbtn'] ){
     	$getuser = $_POST['user'];
@@ -35,12 +34,12 @@
     						if( (strlen($getemail) >= 7) && (strstr($getemail, "@")) && (strstr($getemail, ".")) ){
     							require("./connect.php");
 
-    							$query = mysql_query("SELECT * FROM users WHERE username='$getuser'");
-    							$numrows = mysql_num_rows($query);
+    							$query = mysqli_query($connection, "SELECT * FROM users WHERE username='$getuser'");
+    							$numrows = mysqli_num_rows($query);
     							if($numrows == 0){
 
-    								$query = mysql_query("SELECT * FROM users WHERE email='$getemail'");
-    								$numrows = mysql_num_rows($query);
+    								$query = mysqli_query($connection, "SELECT * FROM users WHERE email='$getemail'");
+    								$numrows = mysqli_num_rows($query);
     								if($numrows == 0){
     								
     									$password = md5(md5("ae5544".$password."eef520d66aaa")); 
@@ -49,12 +48,12 @@
     									$date = date("F d, Y");
     									$code = md5(rand());
 
-    									mysql_query("INSERT INTO users VALUES (
-    										'', '$getuser', '$getpass', '$getemail', '0', '$code', '$date'
+    									mysqli_query($connection, "INSERT INTO users VALUES (
+    										'', '$getuser', '$password', '$getemail', '0', '$code', '$date'
     									)");
 
-    									$query = mysql_query("SELECT * FROM users WHERE username=$getuser");
-    									$numrows = mysql_num_rows($query);
+    									$query = mysqli_query($connection, "SELECT * FROM users WHERE username='$getuser'");
+    									$numrows = mysqli_num_rows($query);
     									if($numrows == 1){
 
     										$site = "http://localhost:8888/htdocs/hoica/";
@@ -109,8 +108,6 @@
     		$errormsg = "You must enter your username to register.";
 
     }
-    else
-    	$errormsg = "";
 
 
     $form = "<form action='./register.php' method='post'>
@@ -150,7 +147,10 @@
 
     </form>";
 
+	echo $form;
 
     ?>
+    
+    
     </body>
     </html>

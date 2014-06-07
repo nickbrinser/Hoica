@@ -7,10 +7,9 @@
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> Member System - Register </title>
     </head>
 
@@ -33,12 +32,6 @@
     				if($getretypepass){
     					if( $getpass === $getretypepass){
     						if( (strlen($getemail) >= 7) && (strstr($getemail, "@")) && (strstr($getemail, ".")) ){
-    							
-    							//the code seems to break on the above line. in error reporting, I'm just seeing "7) &&"
-    							//and the rest of the entire code. Nothing else seems to show up. I don't know if that
-    							//is just something wrong with error reporting or if it is actually something wrong with
-    							//this actual line of code.
-
     							require("./connect.php");
 
     							$query = mysql_query("SELECT * FROM users WHERE username='$getuser'");
@@ -59,7 +52,7 @@
     										'', '$getuser', '$getpass', '$getemail', '0', '$code', '$date'
     									)");
 
-    									$query = mysql_query("SELECT * FROM users WHERE username='$getuser'");
+    									$query = mysql_query("SELECT * FROM users WHERE username=$getuser");
     									$numrows = mysql_num_rows($query);
     									if($numrows == 1){
 
@@ -81,52 +74,42 @@
     											$getuser = "";
     											$getemail = "";
     										}
-    										else{
+    										else
     											$errormsg = "An error has occured. Your activation email was not sent.";
-    										}
     									}	
-    									else{
-    										$errormsg = "An error has occured. Your account was not created";
-    									}
+    									else
+    									$errormsg = "An error has occured. Your account was not created";
     								}
-    								else{
-    									$errormsg = "There is already a user with that email";
-    								}
+    								else
+    								$errormsg = "There is already a user with that email";
+    								
     							}
-    							else{
+    							else
     								$errormsg = "There is already a user with that username";
-    							}
 
     							mysql_close;
     						}
-    						else{
+    						else
     							$errormsg = "You must enter a valid email address to register.";
-    						}
     					}
-    					else{
+    					else
     						$errormsg = "Your passwords did not match";
-    					}
     				}
-    				else{
+    				else
     					$errormsg = "You must retype your password to register";
-    				}
     			}
-    			else{
+    			else
     				$errormsg = "You must enter a password to register";
-    			}
     		}
-    		else{
+    		else
     			$errormsg = "You must enter your email to register";
-    		}
     	}
-    	else{
+    	else
     		$errormsg = "You must enter your username to register.";
-    	}
 
     }
- else{
+    else
     	$errormsg = "";
- }
 
 
     $form = "<form action='./register.php' method='post'>
@@ -168,5 +151,7 @@
 
 
     ?>
+    
+    
     </body>
     </html>
