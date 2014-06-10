@@ -1,3 +1,6 @@
+//this file is strictly for error checking and error reporting within the DOM.
+//Disregard.
+
 <?php
     
     error_reporting (E_All ^ E_NOTICE);
