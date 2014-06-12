@@ -19,6 +19,9 @@
 
         <?php
             
+            //require connect.php may need to be here. 
+            
+            
      if ($username && $userid){
                 echo "You are already logged in as <b>$username</b>. Click <a href='./member.php'>here</a> to go to the member page.";
 
